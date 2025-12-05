@@ -1,0 +1,21 @@
+# Weather chatbot using gemini 2.5 flash model and OpenWeatherMap API To retrieve the Weather information in conversational way.
+
+
+To Run the project locally, follow these steps:
+1. Clone the repository to your local machine.
+2. Navigate to the project directory.
+3. Create and activate a virtual environment:
+   * On macOS/Linux:
+     * python3 -m venv venv
+     * source venv/bin/activate
+   * On Windows (PowerShell):
+     * py -m venv venv
+     * .\venv\Scripts\Activate
+4. Install the required dependencies using pip: [ pip install . ]
+5. Set up your OpenWeatherMap API key in the configuration file or as an environment variable.
+6. Run the application using the command:
+7. python main.py
+8. Clone the frontend repository to your local machine.
+9. Read the Readme file for frontend setup instructions.
+10. run the frontend application.
+11. navigate to http://localhost:5173 to access the chatbot interface.
