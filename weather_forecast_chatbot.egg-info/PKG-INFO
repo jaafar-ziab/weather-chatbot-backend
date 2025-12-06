@@ -1,3 +1,16 @@
+Metadata-Version: 2.4
+Name: weather-forecast-chatbot
+Version: 0.1.0
+Summary: Weather chatbot backend with FastAPI + OpenWeather and Ollama LLM
+Author-email: example <example@gmail.com>
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+Requires-Dist: fastapi>=0.116.0
+Requires-Dist: uvicorn>=0.35.0
+Requires-Dist: requests>=2.31.0
+Requires-Dist: python-dotenv>=1.1.1
+Requires-Dist: google-genai>=1.46.0
+
 # Weather chatbot using gemini 2.5 flash model and OpenWeatherMap API To retrieve the Weather information in conversational way.
 
 To Run the project locally, follow these steps:
