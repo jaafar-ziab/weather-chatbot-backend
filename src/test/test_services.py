@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import Mock, patch
-from  weather_chatbot.src.services.service import geocode, get_weather, get_forcast, get_air_quality, get_map_tile_url
+from src.services.service import geocode, get_weather, get_forcast, get_air_quality, get_map_tile_url
 
 
 class TestGeocode(unittest.TestCase):

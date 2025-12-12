@@ -2,8 +2,8 @@ from typing import Literal, Optional, List, Any, cast
 from pydantic import BaseModel
 from google import genai
 from google.genai import types
-from services.service import Config
-from services import service
+from src.services.service import Config
+from src.services import service
 import logging
 
 # Load configuration

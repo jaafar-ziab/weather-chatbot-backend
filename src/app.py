@@ -5,7 +5,7 @@ from fastapi import status
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 import logging
-from services.service import Config
+from src.services.service import Config
 from llm_schema import llm_extract
 
 app = FastAPI(title="Weather Chatbot", version="1.0.0")
