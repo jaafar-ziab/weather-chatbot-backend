@@ -1,11 +1,12 @@
 import uuid
 from fastapi import FastAPI
+from time import time
+from fastapi import status
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 import logging
 from services.service import Config
 from llm_schema import llm_extract
-
 
 app = FastAPI(title="Weather Chatbot", version="1.0.0")
 
@@ -23,7 +24,18 @@ class ChatIn(BaseModel):
     session_id: str | None = None
 
 
+class HealthOut(BaseModel):
+    status: str
+    uptime_seconds: float | None = None
+
+
+START_TIME = time()
 SESSIONS = {}
+
+
+@app.get("/health", response_model=HealthOut, status_code=status.HTTP_200_OK)
+async def health():
+    return HealthOut(status="ok", uptime_seconds=time() - START_TIME)
 
 
 @app.post("/chat")
