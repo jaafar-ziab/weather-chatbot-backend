@@ -1,5 +1,5 @@
 import uvicorn
-from app import app  # import app from app.py
+from src.app import app  # import app from app.py
 import logging
 
 
