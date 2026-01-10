@@ -1,8 +1,8 @@
 from typing import List, Any, cast
 from google.genai import types
 from .config import client
+from ..services import weather_service
 import logging
-from .services import weather_service as service
 
 
 # Function declarations for Gemini

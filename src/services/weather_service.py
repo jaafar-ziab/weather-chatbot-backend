@@ -1,38 +1,10 @@
-import os
 from collections import defaultdict
 from datetime import datetime
 import requests
 from fastapi import HTTPException
-from dotenv import load_dotenv
 import logging
 import math
-
-
-load_dotenv()
-
-class Config:
-    def __init__(self):
-        self.OWM_KEY = os.getenv("OWM_KEY")
-        self.LLM_API_KEY = os.getenv("LLM_API_KEY")
-        self.OLLAMA_URL = os.getenv("OLLAMA_URL")
-        self.OWM_URL = os.getenv("OWM_URL")
-        self.OWM_CURRENT = os.getenv("OWM_CURRENT")
-        self.OWM_FORECAST = os.getenv("OWM_FORECAST")
-        self.OWM_AIR = os.getenv("OWM_AIR")
-        self.STANDARD = os.getenv("STANDARD")
-        self.SATELLITE = os.getenv("SATELLITE")
-        self.TERRAIN = os.getenv("TERRAIN")
-        self.ALLOW_ORIGINS = os.getenv("ALLOW_ORIGINS")
-
-config = Config()
-
-
-class CommonTileProviders:
-    STANDARD = config.STANDARD
-    SATELLITE = config.SATELLITE
-    TERRAIN = config.TERRAIN
-
-
+from ..config import config, CommonTileProviders
 
 
 def geocode(location: str) -> dict:
@@ -85,7 +57,6 @@ def get_forcast(location: str, units: str):
     r.raise_for_status()
     raw =r.json()
     daily = defaultdict(list)
-    print("daily", raw)
     for entry in raw["list"]:
         dt = datetime.fromtimestamp(entry["dt"])
         date_key = dt.strftime("%Y-%m-%d")
@@ -142,7 +113,6 @@ def get_map_tile_url(location: str, zoom: int = 10,
     x, y = deg2num(latitude, longitude, zoom)
 
     base_url = CommonTileProviders.STANDARD
-    print("base_url", base_url)
     tile_url = base_url.replace("{z}", str(zoom)).replace("{x}", str(x)).replace("{y}", str(y))
     logging.info(f"get the map tile URL for {location}")
     return {
