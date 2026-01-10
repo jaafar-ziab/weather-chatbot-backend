@@ -1,11 +1,11 @@
 import unittest
 from unittest.mock import Mock, patch
-from src.services.service import geocode, get_weather, get_forcast, get_air_quality, get_map_tile_url
+from ..services.weather_service import geocode, get_weather, get_forcast, get_air_quality, get_map_tile_url
 
 
-class TestGeocode(unittest.TestCase):
+class TestServices(unittest.TestCase):
     def test_geocode_success(self):
-            with patch('src.services.service.requests.get') as mock_get:
+            with patch('src.services.weather_service.requests.get') as mock_get:
                 mock_response = Mock()
                 mock_response.json.return_value = [{
                     "name": "Berlin",
@@ -21,7 +21,7 @@ class TestGeocode(unittest.TestCase):
                 self.assertEqual(result["lon"], 13.4050)
 
     def test_get_weather_success(self):
-        with patch('src.services.service.requests.get') as mock_get:
+        with patch('src.services.weather_service.requests.get') as mock_get:
             # Mock geocode response
             mock_geocode_response = Mock()
             mock_geocode_response.json.return_value = [{
@@ -44,11 +44,10 @@ class TestGeocode(unittest.TestCase):
             mock_get.side_effect = [mock_geocode_response, mock_weather_response]
 
             result = get_weather("Berlin", "C")
-            print (result)
             self.assertEqual(result[0]["weather"], "Berlin: 'overcast clouds, 9C")
 
     def test_get_forcast_success(self):
-        with patch('src.services.service.requests.get') as mock_get:
+        with patch('src.services.weather_service.requests.get') as mock_get:
             # Mock geocode response
             mock_geocode_response = Mock()
             mock_geocode_response.json.return_value = [{
@@ -76,7 +75,6 @@ class TestGeocode(unittest.TestCase):
             mock_get.side_effect = [mock_geocode_response, mock_forecast_response]
 
             result = get_forcast("Berlin", "C")
-            print (result)
             self.assertIn("Sunday 2025-11-09: light rain, 15°C", result[0].strip())
             self.assertIn("Monday 2025-11-10: scattered clouds, 17°C", result[1].strip())
             self.assertIn("Tuesday 2025-11-11: clear sky, 16°C", result[2].strip())
@@ -84,7 +82,7 @@ class TestGeocode(unittest.TestCase):
             self.assertIn("Thursday 2025-11-13: moderate rain, 13°C", result[4].strip())
 
     def test_air_quality(self):
-        with patch('src.services.service.requests.get') as mock_get:
+        with patch('src.services.weather_service.requests.get') as mock_get:
             mock_geocode_response = Mock()
             mock_geocode_response.json.return_value = [{
                 "name": "Berlin",
@@ -116,12 +114,10 @@ class TestGeocode(unittest.TestCase):
             mock_geocode_response.raise_for_status = Mock()
             mock_get.side_effect = [mock_geocode_response, mock_air_quality_response]
             result = get_air_quality("Berlin")
-            print (result)
             self.assertEqual(result[0]["air-quality"]["list"][0]["main"]["aqi"], 2)
 
     def test_get_map_tile_url(self):
             result = get_map_tile_url("Berlin", zoom=10, map_type="standard")
-            print(result)
             self.assertTrue(result["tile_url"].startswith('https://tile.openstreetmap.org'))
             self.assertTrue(result["tile_url"].endswith('.png'))
             self.assertEqual(result["zoom"], 10)

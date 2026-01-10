@@ -1,11 +1,9 @@
 from time import time
 from fastapi.middleware.cors import CORSMiddleware
-from .config import config
+from config import config
 from fastapi import FastAPI, status
-from .models.schemas import HealthOut
-from .routers.auth import router as auth_router
-from .routers.chat import router as chat_router
-from .routers.root import router as root_router
+from models.schemas import HealthOut
+from routers.auth import router
 
 
 app = FastAPI(title="Weather Chatbot", version="1.0.0")
@@ -27,6 +25,6 @@ async def health():
     return HealthOut(status="ok", uptime_seconds=time() - START_TIME)
 
 
-app.include_router(root_router, tags=["Root"])
-app.include_router(auth_router, tags=["authentication"])
-app.include_router(chat_router, tags=["chat"])
+app.include_router(router.root)
+app.include_router(router.auth)
+app.include_router(router.chat)
