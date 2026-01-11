@@ -2,10 +2,11 @@
 Python 3.11+, pip, virtual environment
 OpenWeatherMap API key (free tier sufficient)
 Google Gemini API key (you can generate from Google Cloud Console)
-Mailtrap account (for email testing)
+Gmail SMTP (for email testing) or you can use any SMTP server.
 
 Installation
-bash# Clone and navigate
+```bash
+# Clone and navigate
 git clone <repo-url>
 cd weather_chatbot
 
@@ -18,6 +19,7 @@ pip install .
 
 # Generate JWT secret
 python -c "import secrets; print(secrets.token_urlsafe(32))"
+```
 
 # Environment Configuration
 Create .env file:
@@ -34,10 +36,10 @@ TERRAIN="....."
 ALLOW_ORIGINS="http://localhost:5173"
 JWT_SECRET_KEY="......"
 DATABASE_URL=sqlite:///./weather_bot.db
-SMTP_SERVER="sandbox.smtp.mailtrap.io"
-SMTP_PORT=2525
-SMTP_USERNAME="....."
-SMTP_PASSWORD="....."
+SMTP_SERVER="smtp.gmail.com"
+SMTP_PORT=587
+SMTP_USERNAME="example@gmail.com"
+SMTP_PASSWORD="your app password"
 ```
 ## Running the Server
 
@@ -50,9 +52,8 @@ uvicorn src.app:app --reload --host 127.0.0.1 --port 8000
 
 # Verify
 curl http://127.0.0.1:8000/health
-# Response: {"status":"ok","uptime_seconds":X.XX}
-
+# Response:
+{"status":"ok","uptime_seconds":X.XX}
+```
 # View docs
 # http://127.0.0.1:8000/docs
-``
-

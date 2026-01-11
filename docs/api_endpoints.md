@@ -6,7 +6,7 @@
 async def root():
     return {
         "message": "Weather Assistant API",
-        "version": "2.0",
+        "version": "1.0",
         "endpoints": {...},
         "docs": "/docs"
     }
@@ -28,8 +28,8 @@ Purpose: Health checks for monitoring/load balancers.
 Request:
 {
   "email": "user@example.com",
-  "username": "johndoe",
-  "password": "securepass123"
+  "username": "Ramidenz",
+  "password": "securepass"
 }
 
 Response:
@@ -48,7 +48,7 @@ Creates user, sends verification email, returns token for immediate app access.
 Request:
 {
   "email": "user@example.com",
-  "password": "securepass123"
+  "password": "securepass"
 }
 
 Response:

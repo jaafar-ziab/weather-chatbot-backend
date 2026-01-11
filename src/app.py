@@ -1,8 +1,8 @@
-from time import time
+
 from fastapi.middleware.cors import CORSMiddleware
 from .config import config
 from fastapi import FastAPI, status
-from .models.schemas import HealthOut
+
 from .routers.auth import router as auth_router
 from .routers.chat import router as chat_router
 from .routers.root import router as root_router
@@ -18,13 +18,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-
-START_TIME = time()
-
-@app.get("/health", response_model=HealthOut, status_code=status.HTTP_200_OK)
-async def health():
-    return HealthOut(status="ok", uptime_seconds=time() - START_TIME)
 
 
 app.include_router(root_router, tags=["Root"])

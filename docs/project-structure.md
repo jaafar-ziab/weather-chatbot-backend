@@ -7,8 +7,8 @@ weather_chatbot/
 │   │   └── schemas.py       # Pydantic models (request/response validation)
 │   ├── routers/
 │   │   ├── auth.py         # /register, /login, /verify-email
-│   │   ├── chat.py         # /chat, /sessions
-│   │   └── root.py         # /, /health
+│   │   ├── chat.py         # /chat, /sessions, ..
+│   │   └── root.py         # /API documentation and health check
 │   ├── services/
 │   │   ├── helper.py       # Auth helpers (hash, tokens, get_current_user)
 │   │   ├── email_services.py  # Send verification emails
@@ -28,12 +28,12 @@ weather_chatbot/
 
 # Key Files Explained
 
- * models/users.py: Defines database tables using SQLAlchemy. `User` stores authentication data, `ChatSession` groups conversations, `ChatMessage` stores individual messages. Relationships use `back_populates` for bidirectional navigation.
+ * models/users.py: Defines database tables using SQLAlchemy. `User` stores authentication and user data, `ChatSession` groups conversations, `ChatMessage` stores individual messages. Relationships use `back_populates` for bidirectional navigation.
  * models/schemas.py: Pydantic models validate API requests/responses. `UserRegister` validates registration data (email format, password length), `ChatIn` validates chat messages, `Token` structures authentication responses.
  * routers/: Each router handles related endpoints. `auth.py` manages registration/login, `chat.py` handles messaging/sessions, `root.py` provides health checks and API info.
  * services/helper.py: Contains reusable auth functions. `hash_password()` uses SHA256→Argon2 pipeline, `create_access_token()` generates JWTs, `get_current_user()` is a FastAPI dependency that validates tokens.
- * services/email_services.py: Loads HTML template, replaces variables (username, verification URL), sends via SMTP. Uses `smtplib` for email delivery.
- * services/weather_service.py: Integrates OpenWeatherMap API. `geocode()` converts location names to coordinates, `get_weather()` fetches current conditions, `get_forcast()` retrieves 5-day forecast.
+ * services/email_services.py: Loads HTML template, replaces variables (username, verification URL), sends via SMTP. Uses `Gmail SMTP` for email delivery.
+ * services/weather_service.py: Integrates OpenWeatherMap API. `geocode()` converts location names to coordinates, `get_weather()` fetches current conditions, `get_forcast()` retrieves 5-day forecast, `get_air_quality` retrieves the air quality(good, bad), `get_map_tile_url` get the map tile url .
  * llm_schema.py: Defines Gemini function calling schema. Declares available functions (get_weather, get_forcast, etc.) with descriptions and parameters. `llm_extract()` processes conversation history, calls Gemini, executes functions, returns formatted response.
  * config.py: Loads environment variables via `python-dotenv`, initializes database engine, configures password hashing context, creates Gemini client.
  * app.py: Creates FastAPI instance, adds CORS middleware, includes routers with tags. Defines health check endpoint showing uptime.

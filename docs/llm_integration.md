@@ -90,7 +90,6 @@ final_response = client.models.generate_content(
 ```
  * Input: Raw function results
  * Output: Natural language response
- * Purpose: Presentation (formatting, tone, follow-ups)
 
 ## Why This Approach:
  * Separation of Concerns: Decision vs presentation

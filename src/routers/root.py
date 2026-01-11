@@ -1,6 +1,16 @@
 from fastapi import APIRouter
+from ..models.schemas import HealthOut
+from time import time
+from fastapi import status
+
 
 router = APIRouter(tags=["Root"])
+START_TIME = time()
+
+
+@router.get("/health", response_model=HealthOut, status_code=status.HTTP_200_OK)
+async def health():
+    return HealthOut(status="ok", uptime_seconds=time() - START_TIME)
 
 
 @router.get("/")

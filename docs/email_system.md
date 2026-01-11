@@ -17,7 +17,7 @@ def send_verification_email(email: str, username: str, token: str):
     # Create email message
     msg = MIMEMultipart('alternative')
     msg['Subject'] = "Verify Your Weather Bot Account"
-    msg['From'] = SMTP_USERNAME
+    msg['From'] = "Weather Chatbot <noreply@weatherbot.com>"
     msg['To'] = email
     
     html_part = MIMEText(body, 'html')
@@ -64,10 +64,6 @@ async def register(
     
     return Token(...)  # Returns immediately
 ```
-
-**Development vs Production**:
-- Development: Emails sent to Mailtrap (caught in inbox, not delivered)
-- Production: Configure real SMTP (Gmail with app password)
 
 ### Email Flow
 1. User registers

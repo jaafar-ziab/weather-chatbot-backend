@@ -37,7 +37,7 @@ app.add_middleware(TrustedHostMiddleware, allowed_hosts=["yourdomain.com"])
 # Restrict CORS in production
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://yourdomain.com"],  # No wildcards
+    allow_origins=["https://yourdomain.com"],
     allow_credentials=True,
     allow_methods=["GET", "POST", "DELETE"],
     allow_headers=["Authorization", "Content-Type"],

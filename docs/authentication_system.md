@@ -55,7 +55,6 @@ async def get_current_user(
 4. Generate verification token (JWT, 24h expiration)
 5. Store user in database (is_verified=False)
 6. Send verification email (background task)
-7. Return access token (user can use app immediately)
 
 # Email Verification:
 1. Extract token from URL query parameter

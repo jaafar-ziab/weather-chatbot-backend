@@ -1,7 +1,7 @@
 ## Unit Tests
 Located in `src/test/test_services.py`:
 Testing Philosophy:
- * Mock external API calls (don't hit real APIs in tests)
+ * Mock external API calls.
  * Test business logic in isolation
  * Verify error handling
  * Ensure edge cases covered
@@ -48,7 +48,7 @@ Interactive API Testing:
 1. Start server: `python main.py`
 2. Open http://127.0.0.1:8000/docs
 3. Test workflow:
- * Register user → Check Mailtrap for email
+ * Register user → Check your email email
  * Login → Copy access_token
  * Click "Authorize" button → Paste token
  * Test /chat endpoint with authenticated requests
