@@ -20,7 +20,7 @@ def send_verification_email(email: str, username: str, token: str):
         body = body.replace("{{verification_url}}", verification_url)
         msg = MIMEMultipart('alternative')
         msg['Subject'] = "Verify Your Weather Bot Account"
-        msg['From'] = "Weather Chatbot <noreply@gmail.com>"
+        msg['From'] = SMTP_USERNAME
         msg['To'] = email
 
         # Attach HTML content
