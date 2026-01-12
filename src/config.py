@@ -28,6 +28,8 @@ class Config:
         self.SMTP_PORT = os.getenv("SMTP_PORT")
         self.SMTP_USERNAME = os.getenv("SMTP_USERNAME")
         self.SMTP_PASSWORD = os.getenv("SMTP_PASSWORD")
+        self.MAILEROO_API_KEY = os.getenv("MAILEROO_API_KEY")
+        self.MAILEROO_FROM_EMAIL = os.getenv("MAILEROO_FROM_EMAIL")
 
 config = Config()
 
